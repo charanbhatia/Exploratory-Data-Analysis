@@ -2,19 +2,20 @@ import React from 'react';
 import './Header.css';
 
 const Header = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleNavClick = (e, section) => {
-    e.preventDefault();
-    scrollToTop();
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // If section not found, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo-section" onClick={scrollToTop} style={{ cursor: 'pointer' }}>
+        <div className="logo-section" onClick={() => scrollToSection('dashboard')} style={{ cursor: 'pointer' }}>
           <svg className="logo-icon" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -46,10 +47,10 @@ const Header = () => {
           </div>
         </div>
         <nav className="nav-menu">
-          <a href="#dashboard" className="nav-link active" onClick={(e) => handleNavClick(e, 'dashboard')}>Dashboard</a>
-          <a href="#analytics" className="nav-link" onClick={(e) => handleNavClick(e, 'analytics')}>Analytics</a>
-          <a href="#insights" className="nav-link" onClick={(e) => handleNavClick(e, 'insights')}>Insights</a>
-          <a href="#export" className="nav-link" onClick={(e) => handleNavClick(e, 'export')}>Export</a>
+          <button onClick={() => scrollToSection('dashboard')} className="nav-link active">Dashboard</button>
+          <button onClick={() => scrollToSection('filters')} className="nav-link">Filters</button>
+          <button onClick={() => scrollToSection('summary')} className="nav-link">Summary</button>
+          <button onClick={() => scrollToSection('charts')} className="nav-link">Charts</button>
         </nav>
       </div>
     </header>

@@ -78,18 +78,20 @@ function App() {
     <div className="App">
       <Header />
 
-      <main className="main-content">
+      <main className="main-content" id="dashboard">
         <div className="page-title">
           <h2>Analytics Dashboard</h2>
           <p>Explore FMCG retail sales data with interactive filters and visualizations</p>
         </div>
 
-        <FilterPanel
-          filterOptions={filterOptions}
-          selectedFilters={selectedFilters}
-          onFilterChange={handleFilterChange}
-          onClearFilters={handleClearFilters}
-        />
+        <div id="filters">
+          <FilterPanel
+            filterOptions={filterOptions}
+            selectedFilters={selectedFilters}
+            onFilterChange={handleFilterChange}
+            onClearFilters={handleClearFilters}
+          />
+        </div>
 
         {error && (
           <div className="error-container">

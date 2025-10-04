@@ -40,7 +40,7 @@ const Dashboard = ({ data }) => {
   return (
     <div className="dashboard">
       {/* Summary Statistics */}
-      <div className="summary-section">
+      <div className="summary-section" id="summary">
         <h2>📈 Summary Statistics</h2>
         <div className="stats-grid">
           <div className="stat-card">
@@ -63,7 +63,7 @@ const Dashboard = ({ data }) => {
       </div>
 
       {/* Charts Grid */}
-      <div className="charts-section">
+      <div className="charts-section" id="charts">
         {/* Sales by Year - Horizontal Bar Chart */}
         <div className="chart-container">
           <h3>Sales Value by Year</h3>

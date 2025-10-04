@@ -65,11 +65,13 @@ class DataService:
         
         for col in filter_columns:
             if col in self._data.columns:
-                # Get unique values, excluding 'All*' values and NaN
+                # Get unique values, excluding NaN
                 unique_vals = self._data[col].dropna().unique()
                 # Convert to string and remove .0 from numbers
                 unique_vals = [str(v).replace('.0', '') if str(v).endswith('.0') else str(v) 
-                              for v in unique_vals if not str(v).startswith('All')]
+                              for v in unique_vals]
+                # Only exclude generic 'All' values (exactly 'All'), not specific ones like 'AllPackType'
+                unique_vals = [v for v in unique_vals if v != 'All']
                 filters[col] = sorted(unique_vals)
         
         return filters
