@@ -4,8 +4,8 @@ A full-stack web application for interactive data exploration and visualization 
 
 ## Live Demo
 
-- **Frontend**: [https://exploratory-data-analysis-mu.vercel.app](https://exploratory-data-analysis-mu.vercel.app)
-- **Backend API**: [https://exploratory-data-analysis-g1rn.onrender.com](https://exploratory-data-analysis-g1rn.onrender.com)
+- **Live**: [https://exploratory-data-analysis-mu.vercel.app](https://exploratory-data-analysis-mu.vercel.app)
+
 
 ## Features
 
