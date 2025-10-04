@@ -10,7 +10,7 @@ function App() {
   const [filterOptions, setFilterOptions] = useState({});
   const [selectedFilters, setSelectedFilters] = useState({});
   const [dashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Fetch filter options on component mount
@@ -20,11 +20,20 @@ function App() {
 
   // Fetch dashboard data whenever filters change
   useEffect(() => {
-    if (Object.keys(filterOptions).length > 0) {
+    // Only fetch if we have filter options AND at least one filter is selected
+    const hasFilters = Object.keys(selectedFilters).some(
+      key => selectedFilters[key] && selectedFilters[key].length > 0
+    );
+    
+    if (Object.keys(filterOptions).length > 0 && hasFilters) {
       fetchDashboardData();
+    } else if (Object.keys(filterOptions).length > 0 && !hasFilters) {
+      // Clear dashboard if no filters selected
+      setDashboardData(null);
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFilters]);
+  }, [selectedFilters, filterOptions]);
 
   const fetchFilterOptions = async () => {
     try {
@@ -95,8 +104,16 @@ function App() {
             <div className="loading-spinner"></div>
             <p className="loading-text">Loading dashboard data...</p>
           </div>
+        ) : dashboardData ? (
+          <Dashboard data={dashboardData} />
         ) : (
-          dashboardData && <Dashboard data={dashboardData} />
+          !error && (
+            <div className="empty-state">
+              <div className="empty-icon">📊</div>
+              <h3>Welcome to EDA Dashboard</h3>
+              <p>Select filters above to start analyzing your data</p>
+            </div>
+          )
         )}
       </main>
 

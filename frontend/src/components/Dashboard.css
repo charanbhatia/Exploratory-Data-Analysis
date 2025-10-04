@@ -41,7 +41,8 @@
 }
 
 .stat-card {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 2px solid rgba(102, 126, 234, 0.5);
   color: white;
   padding: 1.5rem;
   border-radius: 12px;
@@ -76,7 +77,7 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
   animation: rotate 20s linear infinite;
 }
 
@@ -87,13 +88,14 @@
 
 .stat-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.5);
+  border-color: rgba(102, 126, 234, 0.8);
 }
 
 .stat-card h3 {
   font-size: 0.95rem;
   margin-bottom: 0.5rem;
-  opacity: 0.9;
+  color: #a0aec0;
   font-weight: 500;
   position: relative;
   z-index: 1;
@@ -107,6 +109,10 @@
   margin: 0;
   position: relative;
   z-index: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .charts-section {

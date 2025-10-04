@@ -67,7 +67,9 @@ class DataService:
             if col in self._data.columns:
                 # Get unique values, excluding 'All*' values and NaN
                 unique_vals = self._data[col].dropna().unique()
-                unique_vals = [str(v) for v in unique_vals if not str(v).startswith('All')]
+                # Convert to string and remove .0 from numbers
+                unique_vals = [str(v).replace('.0', '') if str(v).endswith('.0') else str(v) 
+                              for v in unique_vals if not str(v).startswith('All')]
                 filters[col] = sorted(unique_vals)
         
         return filters
@@ -83,9 +85,19 @@ class DataService:
             if value and key in df.columns:
                 # Handle multiple values (array)
                 if isinstance(value, list) and len(value) > 0:
-                    df = df[df[key].isin(value)]
+                    # Convert filter values to match data type
+                    if key == 'Year':
+                        # Convert year strings to numeric for comparison
+                        filter_values = [float(v.replace('.0', '')) if isinstance(v, str) else float(v) for v in value]
+                        df = df[df[key].isin(filter_values)]
+                    else:
+                        df = df[df[key].isin(value)]
                 elif not isinstance(value, list) and value:
-                    df = df[df[key] == value]
+                    if key == 'Year':
+                        filter_value = float(value.replace('.0', '')) if isinstance(value, str) else float(value)
+                        df = df[df[key] == filter_value]
+                    else:
+                        df = df[df[key] == value]
         
         return df
     
