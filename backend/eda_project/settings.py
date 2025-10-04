@@ -116,4 +116,4 @@ REST_FRAMEWORK = {
 }
 
 # Data file path
-DATA_FILE_PATH = os.path.join(BASE_DIR.parent, 'Technical Evaluation.csv')
+DATA_FILE_PATH = os.path.join(BASE_DIR, 'Technical Evaluation.csv')
